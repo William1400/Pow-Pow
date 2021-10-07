@@ -1,0 +1,39 @@
+body {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    background-color: #213458;
+}
+
+.container {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+canvas {
+    
+    width: 700px;
+    height: 500px;
+    border: 5px solid;
+    border-radius: 1em;
+    background-color: #FFCA85;
+    box-shadow:
+    0px 0px 27.8px rgba(0, 0, 0, 1),
+    0px 0px 55.6px rgba(0, 0, 0, 0.606),
+    0px 0px 83.4px rgba(0, 0, 0, 0.495),
+    0px 0px 111.4px rgba(0, 0, 0, 0.417),
+    0px 0px 140px rgba(0, 0, 0, 0.35),
+    0px 0px 169.6px rgba(0, 0, 0, 0.289),
+    0px 0px 201.5px rgba(0, 0, 0, 0.229),
+    0px 0px 238.8px rgba(0, 0, 0, 0.171),
+    0px 0px 292.9px rgba(0, 0, 0, 0.114),
+    0px 0px 500px rgba(0, 0, 0, 0.057);
+
+}
