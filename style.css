@@ -28,6 +28,10 @@ canvas {
 
 button {
 
+    background-color: #584B82;
+    opacity: 0.4;
+    cursor: pointer;
+    font-weight: bolder;
     padding: 15px 50px;
     margin:10px 4px;
     color: #ffffff;
@@ -37,41 +41,9 @@ button {
     position: relative;
     text-decoration: none;
     display:inline-block;
-        
-}
-
-button {
-    
-    border:1px solid transparent; 
     -webkit-transition: 0.4s cubic-bezier(.5, .24, 0, 1);
     transition: 0.4s cubic-bezier(.5, .24, 0, 1);
-}
-
-button::before {
-
-    content: "";
-    position: absolute;
-    left: 0px;
-    bottom: 0px;
-    z-index: -1;
-    width: 0%;
-    height: 1px;
-    background: #213458;
-    box-shadow: inset 0px 0px 0px #b6cdef;
-    display: block;
-    -webkit-transition: 0.4s cubic-bezier(.5, .24, 0, 1);
-    transition: 0.40s cubic-bezier(.5, .24, 0, 1);
-
-
-
-}
-
-button {
-
-    background-color: #584B82;
-    opacity: 0.4;
-    cursor: pointer;
-    font-weight: bolder;
+    border:1px solid transparent; 
 
 }
 
@@ -80,9 +52,11 @@ button:hover{
     background-color: #FFCA85;
     font-style: italic;
     color: #213458;
+   
 }
 
 h2 {
 
     text-align: center;
+    color: bisque;
 }
