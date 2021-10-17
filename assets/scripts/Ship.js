@@ -6,18 +6,18 @@ class Ship {
         numbRows: 2
     }
 
-    constructor(image, canvas, ctx) {
+    constructor(imageShip, imageBullet, canvas, ctx) {
 
         this.canvas = canvas;
         this.ctx = ctx;
 
-        this.image = image;
+        this.imageShip = imageShip;
 
         this.column = 2;
         this.row = 0;
 
-        this.width = this.image.width / 5;
-        this.height = this.image.height / 2;
+        this.width = this.imageShip.width / Ship.spritesConfig.numbColumns;
+        this.height = this.imageShip.height / Ship.spritesConfig.numbRows;
 
         this.x = this.canvas.width / 2 - this.width / 2;
         this.y = this.canvas.height - this.height;
@@ -29,14 +29,18 @@ class Ship {
 
         this.leftAnimationFrame = 0;
         this.rigthAnimationFrame = 0;
-        this.xAnimationFrames = 1;
-        this.isMovingLeft = false;
-        this.isMovingRight = false;
+        this.xAnimationFrames = 10;
+        this.isMovingHorizontally = false;
+
+        this.bulletImage = imageBullet;
+        this.bullets = [];
+        this.count = 0;
+        this.shootFrames = 5;
 
     }
 
     draw() {
-        console.log(this.column);
+    
         let sx = this.width * this.column;
         let sy = this.height * this.row;
         let sWidth = this.width;
@@ -47,7 +51,7 @@ class Ship {
         let dWidth = this.width;
         let dHeight = this.height;
 
-        if (!this.isMovingLeft || !this.isMovingRight) {
+        if (!this.isMovingHorizontally) {
 
             if (this.column > 2) {
                 
@@ -60,8 +64,16 @@ class Ship {
         }
       
         this.updateThrusterAnimation();
-        this.ctx.drawImage(this.image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+        this.ctx.drawImage(this.imageShip, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
 
+        for (let i = 0; i < this.bullets.length; i++) {
+            
+            this.bullets[i].draw();
+            this.bullets[i].move();
+        }
+
+        this.count = this.count + 1;
+        
 
     }
 
@@ -84,7 +96,7 @@ class Ship {
 
             this.x = this.x - this.speed;
             this.updateLeftAnimation(0);
-            this.isMovingLeft = true;
+            this.isMovingHorizontally = true;
         }
 
     }
@@ -95,7 +107,7 @@ class Ship {
 
             this.x = this.x + this.speed;
             this.updateRigthAnimation(Ship.spritesConfig.numbColumns - 1);
-            this.isMovingRight = true;
+            this.isMovingHorizontally = true;
         }
 
     }
@@ -120,7 +132,7 @@ class Ship {
 
     updateLeftAnimation(column) {
 
-        if (this.column > column && this.leftAnimationFrame == this.xAnimationFrames) {
+        if (this.column > column && this.leftAnimationFrame >= this.xAnimationFrames) {
 
             this.column--;
             this.leftAnimationFrame = 0;
@@ -134,7 +146,7 @@ class Ship {
 
     updateRigthAnimation(column) {
 
-        if (this.column < column && this.rigthAnimationFrame == this.xAnimationFrames) {
+        if (this.column < column && this.rigthAnimationFrame >= this.xAnimationFrames) {
 
             this.column++;
             this.rigthAnimationFrame = 0;
@@ -142,6 +154,18 @@ class Ship {
         else {
 
             this.rigthAnimationFrame++;
+        }
+
+    }
+
+    shoot() {
+
+        if (this.count >= this.shootFrames) {
+            
+            let bullet = new Bullet(this.bulletImage, this.canvas, this.ctx, this.x, this.y, this.width);
+            this.bullets.push(bullet);
+            this.count = 0;
+            
         }
 
     }

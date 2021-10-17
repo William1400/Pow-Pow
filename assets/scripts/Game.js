@@ -1,18 +1,5 @@
 class Game {
 
-    static urls = {
-
-        bg: "assets/img/bg.png",
-        cloud: "assets/img/clouds.png",
-        enemyB: "assets/img/enemy-big.png",
-        enemyM: "assets/img/enemy-medium.png",
-        enemeyS: "assets/img/enemy-small.png",
-        explosion: "assets/img/explosion.png",
-        laser: "assets/img/laser-bolts.png",
-        ship: "assets/img/ship.png"
-
-    }
-
     constructor(images) {
 
         this.canvas = document.getElementById("canvas");
@@ -27,22 +14,20 @@ class Game {
         this.bgPosition = 0;
         this.bgSpeed = 2;
 
-        this.ship = new Ship(this.images.ship, this.canvas, this.ctx);
+        this.ship = new Ship(this.images.ship, this.images.laser, this.canvas, this.ctx);
 
         this.keysPressed = {};
         document.addEventListener('keydown', event => this.keysPressed[event.key] = true);
         document.addEventListener('keyup', event => {
 
             delete this.keysPressed[event.key];
-            if (event.key == 'ArrowLeft') {
+            if (event.key == 'ArrowLeft' || event.key == 'ArrowRight') {
 
-                this.ship.isMovingLeft = false;
-            }
-            if (event.key == 'ArrowRight') {
-
-                this.ship.isMovingRight = false;
+                this.ship.isMovingHorizontally = false;
             }
         });
+
+       
     }
 
     handleBackground() {
@@ -83,6 +68,10 @@ class Game {
 
                 this.ship.moveUp();
             }
+            if (keys[i] == ' ') {
+                 
+                this.ship.shoot();
+            }
         }
 
     }
@@ -92,7 +81,7 @@ class Game {
         this.handleKeysPressed();
         this.handleBackground();
         this.handleShip();
-
+        
     }
 
 

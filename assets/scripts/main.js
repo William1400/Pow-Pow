@@ -1,3 +1,16 @@
+let urls = {
+
+    bg: "assets/img/bg.png",
+    cloud: "assets/img/clouds.png",
+    enemyB: "assets/img/enemy-big.png",
+    enemyM: "assets/img/enemy-medium.png",
+    enemeyS: "assets/img/enemy-small.png",
+    explosion: "assets/img/explosion.png",
+    laser: "assets/img/laser-bolts.png",
+    ship: "assets/img/ship.png"
+
+}
+
 function loadImages(urls) {
 
     let urlKeys = Object.keys(urls);
@@ -33,5 +46,5 @@ function startGame(images) {
 
 }
 
-loadImages(Game.urls);
+loadImages(urls);
 
